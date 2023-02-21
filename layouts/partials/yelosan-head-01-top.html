@@ -1,0 +1,234 @@
+<meta charset="utf-8">
+<link href="{{ with .Params.relcanonical }}{{ . }}{{ else }}{{ .Permalink }}{{ end }}" rel="canonical" />
+{{- /*
+  NOTE:
+  - All non-visible dates/times are in UTC for uniformity.
+  - The consumer app/software can do the conversion as needed.
+  - do not re-arrange
+*/ -}}
+{{- $iso8601 := "2006-01-02T15:04:05Z07:00" -}}
+
+{{- $authors := "" -}}
+{{- $datapersons := .Site.Data.persons -}}
+{{- $semwebpersons := .Site.Params.semweb.persons -}}
+{{- $frontmatterpersons := .Params.authors }}
+{{- if $frontmatterpersons -}}
+  {{/* NOTE: if [[authors]] is set in frontmatter, use this to display a list of persons with fallback to /data/persons/ if present */}}
+  {{- range $i, $frontmatterperson := index $frontmatterpersons -}}
+    {{ $dataperson := index $datapersons $frontmatterperson.person }}{{ if $i }}, {{ end }}
+    {{ $authors = or $frontmatterperson.name $dataperson.name }}
+  {{- end -}}
+{{- else if $semwebpersons -}}
+  {{/* NOTE: else if [[semweb.persons]] is set in config file, use it to display a list of persons with fallback to /data/persons/ if present */}}
+  {{- range $i, $semwebperson := index $semwebpersons -}}
+    {{ $dataperson := index $datapersons $semwebperson.person }}{{ if $i }}, {{ end }}
+    {{ $authors = or $semwebperson.name $dataperson.name }}
+  {{ end }}
+{{- else if .Param "author" -}}
+  {{/* NOTE: else if default Hugo 'author' param is used in frontmatter or config, display generic */}}
+  {{ $authors = .Param "author" }}
+{{- end -}}
+
+{{- $keywords := "" -}}
+{{- if .Params.keywords -}}
+  {{ $keywords = delimit .Params.keywords ", " }}
+{{- else if or .Params.tags .Params.categories -}}
+  {{ $keywords = delimit (apply (union .Params.tags .Params.categories) "chomp" ".") ", " }}
+{{- else -}}
+  {{ $keywords = delimit .Site.Params.keywords ", " }}
+{{- end -}}
+
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+{{/* BGN: Translations */}}
+  {{- if .IsTranslated }}
+  {{ range .AllTranslations -}}
+  <link href="{{ .Permalink }}" hreflang="{{ or (.Site.LanguageCode) (.Site.Language.Lang) }}" rel="alternate" />
+  {{ end -}}
+  {{ range first 1 .AllTranslations }}<link href="{{ .Permalink }}" hreflang="x-default" rel="alternate" />{{ end }}
+  {{- end -}}
+{{/* END: Translations */}}
+{{ range .AlternativeOutputFormats }}
+  <link href="{{ .Permalink | safeURL }}" type="{{ .MediaType.Type | html }}" rel="{{ .Rel }}" />
+{{- end }}
+<link href="{{ .Permalink }}" rel="self" />
+{{ range .Site.Params.websubhubs }}
+  <link href="{{ . }}" rel="hub" />
+{{- end }}
+{{- /* NOTE: for reference, if we need it again
+  <meta name="robots" content="{{ if or (eq .Kind "taxonomy") (eq .Kind "term") }}noindex{{ else if .Params.metarobots }}{{ .Params.metarobots }}{{ else }}index{{ end }}, follow" />
+*/ -}}
+<meta name="robots" content="{{ if .Params.metarobots }}{{ .Params.metarobots }}{{ else }}all, index{{ end }}, follow" />
+{{ with .Params.redirectto }}<meta http-equiv="refresh" content="0; url='{{ . }}'" />{{ end }}
+<meta name="author" content="{{ $authors }}" />
+{{ with (.Param "description") }}<meta name="description" content="{{ . | plainify }}" class="p-summary" />{{ end }}
+{{ with $keywords }}<meta name="keywords" content="{{ . }}" />{{ end }}
+{{ with or .Lastmod .PublishDate .Date }}<meta name="modified" content="{{ .UTC.Format $iso8601 | safeHTML }}" />{{ end }}
+{{ with or .PublishDate .Date .Lastmod }}<meta name="created" content="{{ .UTC.Format $iso8601 | safeHTML }}" />{{ end }}
+
+<link href="https://indieauth.com/auth" rel="indieauth-metadata authorization_endpoint" />
+<link href="https://keyboards.youronly.one/" rel="openid.delegate" />
+<link href="https://openid.indieauth.com/openid" rel="openid.server" />
+
+{{- /*
+  NOTE: This is a temporary hack to save the cover image.
+
+  TODO:
+    - Ideally in "single.html" or an "image.html" template (for reuse).
+    - Also add "$imagewebp" and "$imagepng" for cover image.
+*/ -}}
+{{- $savecoverimage := "" -}}
+{{- $savecoverimageremote := "" -}}
+{{- $savecoverimagelocal := "" -}}
+{{- with .Params.images -}}
+  {{- range first 1 . -}}
+    {{- if (urls.Parse .).Scheme -}}
+      {{/* remote */}}
+      {{- $savecoverimageremote = . -}}
+    {{- else -}}
+      {{- $savecoverimagelocal = partial "getresource.html" . -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{/* Pass correct image URL */}}
+  {{- if $savecoverimageremote -}}
+    {{- $savecoverimage = $savecoverimageremote -}}
+  {{- else if $savecoverimagelocal -}}
+    {{- $savecoverimage = $savecoverimagelocal.RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/twitter_cards.html" . }}
+{{ partial "schemas/semweb.html" . }}
+
+{{ if site.IsServer }}
+  <meta http-equiv="cache-control" content="no-cache">
+{{ end }}
+
+{{/* BGN: Analytics codes */}}
+  {{- $cfwebanalyticsid := .Site.Params.analytics.cfwebanalytics -}}
+  {{- $microanalyticsioid := .Site.Params.analytics.microanalyticsio -}}
+  {{- $naveranalyticsid := .Site.Params.analytics.naver -}}
+
+  {{- /*
+    NOTE: Naver Analytics will only work if inline and the actual code is retained.
+
+    - Tested:
+      - external JS
+      - embedding Hugo processed JS (with params)
+  */ -}}
+  {{- /* see previous note
+    {{- $naverjs := resources.Get "js/analytics-naver.js" | js.Build ( dict "params" ( dict "naveranalyticsid" $naveranalyticsid ) ) -}}
+    {{- $naverjs = $naverjs | fingerprint "sha512" -}}
+  */ -}}
+
+  {{- $counterdevid := .Site.Params.analytics.counterdev -}}
+  {{- $counterdevjs := resources.Get "js/analytics-counterdev.js" | js.Build ( dict "params" ( dict "counterdevid" $counterdevid ) ) -}}
+
+  {{- $swetrixid := .Site.Params.analytics.swetrix -}}
+  {{- $swetrixjs := resources.Get "js/analytics-swetrix.js" | js.Build ( dict "params" ( dict "swetrixid" $swetrixid ) ) -}}
+  {{- $swetrixjs = $swetrixjs | minify | fingerprint "sha512" -}}
+
+  {{- $msftclarityid := .Site.Params.analytics.microsoftclarity -}}
+  {{- $msftclarityjs := resources.Get "js/analytics-msftclarity.js" | js.Build ( dict "params" ( dict "msftclarityid" $msftclarityid ) ) -}}
+
+  {{- $analyticsjs := slice $counterdevjs $msftclarityjs | resources.Concat "js/analytics.js" -}}
+  {{- $analyticsjs = $analyticsjs | minify | fingerprint "sha512" -}}
+
+  {{- with $cfwebanalyticsid }}
+    <link href="https://static.cloudflareinsights.com/beacon.min.js" crossorigin="anonymous" rel="preload" as="script" />
+    <script src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ . }}"}' crossorigin="anonymous" type="text/javascript"></script>
+  {{ end }}
+  {{- with $microanalyticsioid }}
+    <link href="https://microanalytics.io/js/script.js" rel="preload" as="script" />
+    <script src="https://microanalytics.io/js/script.js" data-host="https://microanalytics.io" data-dnt="true" id="{{ . }}" type="text/javascript"></script>
+  {{ end }}
+  {{- with $naveranalyticsid }}
+    <link href="https://wcs.naver.net/wcslog.js" rel="preload" as="script" />
+    <script src="https://wcs.naver.net/wcslog.js" type="text/javascript"></script>
+    {{- /*
+      NOTE: Naver Analytics will only work if inline and the actual code is retained.
+
+      - Tested:
+        - external JS
+        - embedding Hugo processed JS (with params)
+    */ -}}
+    {{- /* see previous note
+      <link href="{{ $naverjs.RelPermalink }}" integrity="{{ $naverjs.Data.Integrity }}" crossorigin="anonymous" rel="preload" as="script" />
+      <script src="{{ $naverjs.RelPermalink }}" integrity="{{ $naverjs.Data.Integrity }}" crossorigin="anonymous" type="text/javascript"></script>
+      <script integrity="{{ $naverjs.Data.Integrity }}" type="{{ $naverjs.MediaType }}">
+        {{ $naverjs.Content | safeJS | safeHTML }}
+      </script>
+    */ -}}
+    <script type="text/javascript">
+      if(!wcs_add) var wcs_add = {};
+      wcs_add["wa"] = "{{ $naveranalyticsid }}";
+      if(window.wcs) {
+        wcs_do();
+      }
+    </script>
+  {{- end -}}
+  {{- with or $counterdevjs $msftclarityjs }}
+    <link href="{{ $analyticsjs.RelPermalink }}" integrity="{{ $analyticsjs.Data.Integrity }}" crossorigin="anonymous" rel="preload" as="script" />
+    <script src="{{ $analyticsjs.RelPermalink }}" integrity="{{ $analyticsjs.Data.Integrity }}" crossorigin="anonymous" type="{{ $analyticsjs.MediaType }}"></script>
+  {{ end }}
+  {{ with $swetrixid }}
+    <link href="https://swetrix.org/swetrix.js" rel="preload" as="script" />
+    <script src="https://swetrix.org/swetrix.js" type="text/javascript"></script>
+    <link href="{{ $swetrixjs.RelPermalink }}" integrity="{{ $swetrixjs.Data.Integrity }}" crossorigin="anonymous" rel="preload" as="script" />
+    <script src="{{ $swetrixjs.RelPermalink }}" integrity="{{ $swetrixjs.Data.Integrity }}" crossorigin="anonymous" type="{{ $swetrixjs.MediaType }}"></script>
+    {{/* <noscript><img src="https://api.swetrix.com/log/noscript?pid={{ . }}" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> */}}
+  {{ end }}
+{{/* END: Analytics codes */}}
+
+{{/* NOTE: above was ordered intentionally */}}
+
+{{ with .Site.Params.verify.flattr }}<meta name="flattr:id" content="{{ . }}" />{{ end }}
+{{ with .Site.Params.verify.naver }}<meta name="naver-site-verification" content="{{ . }}" />{{ end }}
+{{ with .Site.Params.verify.wot }}<meta name="wot-verification" content="{{ . }}" />{{ end }}
+{{ with .Site.Params.verify.ocs }}<meta name="ocs-site-verification" content="{{ . }}" />{{ end }}
+{{ with .Site.Params.verify.followit }}<meta name="follow.it-verification-code" content="{{ . }}" />{{ end }}
+
+{{ hugo.Generator }}
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license" />
+
+{{- /*
+  NOTE:
+  - will disable the prefetch feature, which we need for external resources
+  - best left to User-Agent setting
+  <meta http-equiv="x-dns-prefetch-control" content="off" />
+*/ -}}
+
+{{/* RESEARCH: https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch */}}
+<link href="https://fonts.googleapis.com" crossorigin="anonymous" rel="preconnect" />
+<link href="https://fonts.googleapis.com" crossorigin="anonymous" rel="dns-prefetch" />
+<link href="https://fonts.gstatic.com" crossorigin="anonymous" rel="preconnect" />
+<link href="https://fonts.gstatic.com" crossorigin="anonymous" rel="dns-prefetch" />
+<link href="https://cdn.jsdelivr.net" crossorigin="anonymous" rel="preconnect" />
+<link href="https://cdn.jsdelivr.net" crossorigin="anonymous" rel="dns-prefetch" />
+<link href="https://unpkg.com" crossorigin="anonymous" rel="preconnect" />
+<link href="https://unpkg.com" crossorigin="anonymous" rel="dns-prefetch" />
+
+<link href="https://cdnjs.cloudflare.com" crossorigin="anonymous" rel="preconnect" />
+<link href="https://cdnjs.cloudflare.com" crossorigin="anonymous" rel="dns-prefetch" />
+<link href="https://ajax.cloudflare.com" crossorigin="anonymous" rel="preconnect" />
+<link href="https://ajax.cloudflare.com" crossorigin="anonymous" rel="dns-prefetch" />
+
+{{- /*
+  RESEARCH:
+  - https://csswizardry.com/2020/05/the-fastest-google-fonts/
+  - https://sia.codes/posts/making-google-fonts-faster/
+
+  NOTE:
+  - due to CSP, we can not use the media="print" onload="this.media='all'" hack in rel="stylesheet"
+*/ -}}
+{{- /* NOTE: cache the styles */ -}}
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Mono:wght@400;700&family=Noto+Sans+Tagalog&family=Noto+Sans+Tagbanwa&family=Noto+Sans+Buhid&family=Noto+Sans+Hanunoo&family=Noto+Sans+Phoenician&family=Noto+Sans+Hebrew:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" crossorigin="anonymous" rel="preload" as="style" />
+{{- /* NOTE: execute the styles */ -}}
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Mono:wght@400;700&family=Noto+Sans+Tagalog&family=Noto+Sans+Tagbanwa&family=Noto+Sans+Buhid&family=Noto+Sans+Hanunoo&family=Noto+Sans+Phoenician&family=Noto+Sans+Hebrew:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" media="all" crossorigin="anonymous" rel="stylesheet" />
+{{- /* NOTE: We do not need this since the print hack is disabled
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2??family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+Mono:wght@400;700&family=Noto+Sans+Tagalog&family=Noto+Sans+Tagbanwa&family=Noto+Sans+Buhid&family=Noto+Sans+Hanunoo&family=Noto+Sans+Phoenician&family=Noto+Sans+Hebrew:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" crossorigin="anonymous" rel="stylesheet" />
+  </noscript>
+*/ -}}

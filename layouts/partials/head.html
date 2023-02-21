@@ -1,0 +1,81 @@
+
+<head>
+  <!-- BGN: Yelosan Publishing Head-01-Top -->
+    {{- if templates.Exists "partials/yelosan-head-01-top.html" -}}
+      {{ partial "yelosan-head-01-top.html" . }}
+    {{- end }}
+  <!-- END: Yelosan Publishing Head-01-Top -->
+
+  {{- /* Yelosan Publishing: We already have this
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  */ -}}
+
+  <link rel="icon" href="{{ if (isset .Site.Params "favicon") }}{{ .Site.Params.favicon }}{{ else }}/favicon.ico{{ end }}">
+
+  <title>
+    {{ block "title" . }} {{- .Title }} - {{ .Site.Title -}} {{ end }}
+  </title>
+
+  {{- /* Yelosan Publishing: We already have this
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end -}}" />
+
+    {{- if .Keywords }}
+    <meta name="keywords" content="{{ delimit .Keywords "," }}" />
+    {{ end -}}
+
+    {{- if .Params.Author }}
+    <meta name="author" content="{{ .Params.Author}}" />
+    {{ end -}}
+
+    {{ hugo.Generator }}
+  */ -}}
+
+  <link rel="stylesheet" href="{{ "/css/main.css" | absURL}}" />
+
+  <!-- Katex support -->
+  {{ if .Params.math }}
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css"
+      integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv"
+      crossorigin="anonymous"
+    >
+
+    <script defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"
+      integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O"
+      crossorigin="anonymous"
+    ></script>
+
+    <script defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/contrib/auto-render.min.js"
+      integrity="sha384-yACMu8JWxKzSp/C1YV86pzGiQ/l1YUfE8oPuahJQxzehAjEt2GiQuy/BIvl9KyeF"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
+  {{ end }}
+
+  {{- /* Yelosan Publishing: We already have this
+    {{ template "_internal/opengraph.html" . }}
+
+    {{ template "_internal/twitter_cards.html" . }}
+
+    {{ template "_internal/schema.html" . }}
+
+    {{ template "_internal/schema.html" . }}
+  */ -}}
+
+  <!-- BGN: Yelosan Publishing Head-02-Bottom -->
+    {{- if templates.Exists "partials/yelosan-head-02-btm.html" -}}
+      {{ partial "yelosan-head-02-btm.html" . }}
+    {{- end }}
+  <!-- END: Yelosan Publishing Head-02-Bottom -->
+
+  <style>
+    div.highlight table.lntable {
+      overflow-x: scroll;
+      display: block;
+    }
+  </style>
+</head>

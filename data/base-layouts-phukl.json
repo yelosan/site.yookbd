@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Colemak",
+    "description": "The 3rd most popular keyboard layout for touch typing in English.",
+    "link": "https://colemak.com",
+    "icon": "",
+    "tag": ""
+  },
+  {
+    "name": "Colemak-DH",
+    "description": "Colemak Mod-DH introduces a minor modification to the Colemak keyboard layout, designed to make typing more comfortable.",
+    "link": "https://colemakmods.github.io/mod-dh/",
+    "icon": "",
+    "tag": ""
+  },
+  {
+    "name": "Capewell-QWERF 2007",
+    "description": "Similar to the QWERTY layout, but with improvements.",
+    "link": "http://www.michaelcapewell.com/projects/keyboard/#The_QWERF_Layout",
+    "icon": "",
+    "tag": ""
+  },
+  {
+    "name": "Capewell-QWERF 2006",
+    "description": "Similar to the QWERTY layout, but with improvements.",
+    "link": "http://www.michaelcapewell.com/projects/keyboard/#The_QWERF_Layout",
+    "icon": "",
+    "tag": ""
+  },
+  {
+    "name": "Capewell-Dvorak",
+    "description": "Puts ZXCV in their QWERTY positions; fixes some 'mistakes' in Dvorak.",
+    "link": "http://www.michaelcapewell.com/projects/keyboard/#The_Capewell-Dvorak_Layout",
+    "icon": "",
+    "tag": ""
+  },
+  {
+    "name": "Dvorak",
+    "description": "The second most popular keyboard layout.",
+    "link": "https://en.wikipedia.org/wiki/Dvorak_keyboard_layout",
+    "icon": "",
+    "tag": ""
+  },
+  {
+    "name": "QWERTY",
+    "description": "The most common keyboard layout.",
+    "link": "https://en.wikipedia.org/wiki/QWERTY",
+    "icon": "",
+    "tag": ""
+  }
+]

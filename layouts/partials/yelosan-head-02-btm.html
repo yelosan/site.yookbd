@@ -1,0 +1,35 @@
+{{- $yukiscss := resources.Get "scss/yuki-style.scss" -}}
+{{- $globalscss := resources.Get "scss/youronly.one-head-03-global.scss" -}}
+{{- $layoutscss := resources.Get "scss/layouts.scss" -}}
+{{- $semwebcss := resources.Get "css/semweb-style.css" -}}
+{{- $quotecss := resources.Get "css/quote.css" -}}
+{{- $localcss := resources.Get "css/yelosan-head-04-local.css" -}}
+
+{{- $yookiscss := slice $yukiscss $globalscss $layoutscss | resources.Concat "scss/yooki.scss" -}}
+{{- $yookicss := $yookiscss | resources.ExecuteAsTemplate "css/yooki.css" . | toCSS -}}
+{{- $yookicss = slice $yookicss $semwebcss $quotecss $localcss | resources.Concat "css/yooki.css" -}}
+{{- $yookicss = $yookicss | minify | fingerprint "sha512" -}}
+
+{{- $yelosanfontscss := resources.Get "css/yelosan-fonts.css" -}}
+{{- $notofontscss := resources.Get "css/noto-fonts.css" -}}
+{{- $dejavufontscss := resources.Get "css/dejavu-fonts.css" -}}
+{{- $pilipinofontscss := resources.Get "css/pilipino-fonts.css" -}}
+{{- $hebrewfontscss := resources.Get "css/hebrew-fonts.css" -}}
+{{- $cciconscss := resources.Get "css/cc-icons.css" -}} {{/* src: https://github.com/techmagus/cc-icons or https://cdn.jsdelivr.net/gh/cc-icons/cc-icons@1.2.1/css/cc-icons.css */}}
+{{- $yelosanfontscss = slice $yelosanfontscss $notofontscss $dejavufontscss $pilipinofontscss $hebrewfontscss $cciconscss | resources.Concat "css/yelosan-fonts.css" -}}
+{{- $yelosanfontscss = $yelosanfontscss | minify | fingerprint "sha512" -}}
+
+<link href="https://polyfill.io/v3/polyfill.min.js?version=3.111.0&features=default%2CIntl%2Ces5%2Ces6%2Ces7%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces2019%2Ces2020%2Ces2021%2Ces2022&flags=gated" crossorigin="anonymous" rel="preload" as="script" />
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.111.0&features=default%2CIntl%2Ces5%2Ces6%2Ces7%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces2019%2Ces2020%2Ces2021%2Ces2022&flags=gated" crossorigin="anonymous" type="text/javascript"></script>
+
+{{- /* NOTE:
+  - cc-icons 1.2.1 as of 2022-12-13
+*/ -}}
+<link href="{{ $yelosanfontscss.RelPermalink }}" integrity="{{ $yelosanfontscss.Data.Integrity }}" crossorigin="anonymous" type="{{ $yelosanfontscss.MediaType }}" media="all" rel="stylesheet" />
+<link href="{{ $yookicss.RelPermalink }}" integrity="{{ $yookicss.Data.Integrity }}" crossorigin="anonymous" type="{{ $yookicss.MediaType }}" media="all" rel="stylesheet" />
+
+<meta name="DC.title" content="IM YourOnly.One 🔏" />
+<meta name="geo.region" content="PH-00" />
+<meta name="geo.placename" content="Manila" />
+<meta name="geo.position" content="14.599781;120.973935" />
+<meta name="ICBM" content="14.599781, 120.973935" />

@@ -1,0 +1,258 @@
+# See: https://gohugo.io/content-management/multilingual/#configure-languages
+# See: https://gohugo.io/variables/menus/
+
+#[en]
+#  languageName = "English"
+#  languageCode = "en"
+#  #languageCodeCountry = "xx"                                        # custom
+#  languageFlag = "🇬🇧"                                               # custom
+#  timeZone = "Etc/UTC"
+#  #tzOffset = "12h"                                                  # custom
+#  tzAbbr = "UTC"                                                    # custom
+#  tzAbbrTitle = "Universal Time Coordinated"                        # custom
+#  weight = 110
+#  [[en.menu.main]]
+#    identifier = "about"
+#    name = "About"
+#    url = "/about/"
+#    weight = 2
+#    #parent = ""
+#    #pre = "<span>"                                                  # HTML
+#    #post = "</span>"                                                # HTML
+#  [[en.menu.main]]
+#    identifier = "archives"
+#    name = "Archives"
+#    url = "/archives/"
+#    weight = 3
+#    #parent = ""
+#    #pre = "<span>"                                                  # HTML
+#    #post = "</span>"                                                # HTML
+
+[en-ph]
+  languageName = "English (PH)"
+  languageCode = "en-PH"
+  languageCodeCountry = "ph"              # custom
+  languageFlag = "🇵🇭"                     # custom
+  timeZone = "Asia/Manila"
+  tzOffset = "8h"                        # custom
+  tzAbbr = "ACT"                          # custom
+  tzAbbrTitle = "Asean Common Time"                        # custom
+  weight = 111
+  [[en-ph.menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  ### BGN: LANGUAGES & SCRIPTS ###
+    [[en-ph.menu.main]]
+      identifier = "langscript"
+      name = "Languages & Scripts"
+      params.header = true
+      weight = 200
+    [[en-ph.menu.main]]
+      identifier = "baybayin"
+      name = "Baybayin"
+      url = "/baybayin"
+      weight = 210
+    [[en-ph.menu.main]]
+      identifier = "ph-ukl"
+      name = "Filipino, English (Philippines)"
+      url = "/filipino-english-philippines"
+      weight = 220
+    [[en-ph.menu.main]]
+      identifier = "phnx-ukl"
+      name = "Phoenician, Paleo Hebrew"
+      url = "/phoenician-paleo-hebrew"
+      weight = "230"
+  ### END: LANGUAGES & SCRIPTS ###
+
+  ### BGN: HOW TO ###
+    [[en-ph.menu.main]]
+      identifier = "installation"
+      name = "Download & Install"
+      params.header = true
+      weight = 500
+    [[en-ph.menu.main]]
+      identifier = "linux"
+      name = "Linux"
+      url = "/linux"
+      weight = 510
+    [[en-ph.menu.main]]
+      identifier = "windows"
+      name = "Windows"
+      url = "/windows"
+      weight = 610
+  ### END: HOW TO ###
+
+  ### BGN: META ###
+    [[en-ph.menu.main]]
+      identifier = "meta"
+      name = "Meta"
+      weight = 800
+      params.header = true
+    [[en-ph.menu.main]]
+      identifier = "license"
+      name = "License"
+      url = "/license"
+      weight = 820
+  ### END: META ###
+
+  ### BGN: LINKS ###
+    [[en-ph.menu.main]]
+      identifier = "links"
+      name = "Links"
+      params.header = true
+      weight = 900
+    [[en-ph.menu.main]]
+      name = "YourOnly.One"
+      url = "https://im.youronly.one"
+      weight = 910
+  ### END: LINKS ###
+
+
+  [[en-ph.menu.main]]
+    identifier = "content"
+    name = "Content"
+    #url = "/archives/"
+    params.header = true
+    weight = 2000
+  [[en-ph.menu.main]]
+    identifier = "portfolio"
+    name = "Portfolio"
+    url = "/portfolio"
+    weight = 4000
+
+
+
+  [[en-ph.menu.social]]
+    name = "Codeberg"
+    url = "https://codeberg.org/yelosan/"
+    weight = 1
+  #[[en-ph.menu.social]]
+  #  name = "Twitter"
+  #  url = "https://twitter.com"
+  #  weight = 2
+  #[[en-ph.menu.social]]
+  #  name = "LinkedIn"
+  #  url = "https://linkedin.com"
+  #  weight = 3
+  #[[en-ph.menu.social]]
+  #  name = "Instagram"
+  #  url = "https://instagram.com"
+  #  weight = 4
+  #[[en-ph.menu.social]]
+  #  name = "Email"
+  #  url = "mailto:user@example.org"
+  #  weight = 8
+  #[[en-ph.menu.social]]
+  #  name = "RSS"
+  #  url = "/articles/index.xml"
+  #  weight = 9
+
+#[fil]
+  #languageName = "Filipino"
+  #languageCode = "fil"
+  #languageCodeCountry = "ph"              # custom
+  #languageFlag = "🇵🇭"                     # custom
+  #timeZone = "Asia/Manila"
+  #tzOffset = "8h"                        # custom
+  #tzAbbr = "ACT"                          # custom
+  #tzAbbrTitle = "Asean Common Time"                        # custom
+  #weight = 120
+  #title = ""
+  #[fil.params]
+    #description = ""     # IMPT for Schema.org; OpenGraph; Twitter Cards -- for RDFa, Microdata, JSON-LD
+
+#[tl-tglg]
+  #languageName = "Tagalog Baybayin"
+  #languageCode = "tl-Tglg"
+  #languageCodeCountry = "ph"              # custom
+  #languageFlag = "🇵🇭"                     # custom
+  #timeZone = "Asia/Manila"
+  #tzOffset = "8h"                        # custom
+  #tzAbbr = "ACT"                          # custom
+  #tzAbbrTitle = "Asean Common Time"                        # custom
+  #title = ""
+  #[tl.tglg.params]
+    #description = ""     # IMPT for Schema.org; OpenGraph; Twitter Cards -- for RDFa, Microdata, JSON-LD
+
+#[zh-hant]
+  #languageName = "中文（繁體）"
+  #languageCode = "zh-Hant"
+  #languageCodeCountry = "cn"              # custom
+  #languageFlag = "🇨🇳"                     # custom
+  #timeZone = "Asia/Shanghai"
+  #tzOffset = "8h"                        # custom
+  #tzAbbr = "CST"                          # custom
+  #tzAbbrTitle = "China Standard Time"                        # custom
+  #weight = 130
+  #title = ""
+  #[zh-hant.params]
+    #description = ""     # IMPT for Schema.org; OpenGraph; Twitter Cards -- for RDFa, Microdata, JSON-LD
+
+#[zh-hans]
+#  languageName = "中文（简体）"
+#  languageCode = "zh-Hans"
+#  languageCodeCountry = "cn"              # custom
+#  languageFlag = "🇨🇳"                     # custom
+#  timeZone = "Asia/Shanghai"
+#  tzOffset = "8h"                        # custom
+#  tzAbbr = "CST"                          # custom
+#  tzAbbrTitle = "China Standard Time"                        # custom
+#  weight = 131
+#  #title = ""
+#  [[zh-hans.menu.main]]
+#    identifier = "about"
+#    name = "关于"
+#    url = "/about/"
+#    weight = 2
+#  [[zh-hans.menu.main]]
+#    identifier = "archives"
+#    name = "归档"
+#    url = "/archives/"
+#    weight = 3
+
+#[ja]
+#  languageName = "日本語"
+#  languageCode = "ja"
+#  languageCodeCountry = "jp"              # custom
+#  languageFlag = "🇯🇵"                     # custom
+#  timeZone = "Asia/Tokyo"
+#  tzOffset = "9h"                        # custom
+#  tzAbbr = "JST"                          # custom
+#  tzAbbrTitle = "Japan Standard Time"                        # custom
+#  weight = 140
+#  title = "ハイテク マギ 🚀"
+#  [[ja.menu.main]]
+#    name              = "ホーム"
+#    identifier        = "home"
+#    url               = "/"
+#    pre               = "home"
+#    weight            = 1
+#    [ja.menu.main.params]
+#      newTab = false
+#  [ja.params]
+#    description = "科学技術の遊び場"     # IMPT for Schema.org; OpenGraph; Twitter Cards -- for RDFa, Microdata, JSON-LD
+
+#[ko]
+#  languageName = "한국어"
+#  languageCode = "ko"
+#  languageCodeCountry = "kr"              # custom
+#  languageFlag = "🇰🇷"                     # custom
+#  timeZone = "Asia/Seoul"
+#  tzOffset = "9h"                        # custom
+#  tzAbbr = "KST"                          # custom
+#  tzAbbrTitle = "Korea Standard Time"                        # custom
+#  weight = 150
+#  title = "테크 마구스 🚀"
+#  [[ko.menu.main]]
+#    identifier = "about"
+#    name = "About"
+#    url = "/about/"
+#    weight = 2
+#  [[ko.menu.main]]
+#    identifier = "archives"
+#    name = "Archives"
+#    url = "/archives/"
+#    weight = 3

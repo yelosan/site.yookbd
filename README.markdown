@@ -1,6 +1,6 @@
-# YourOnly.One™ Keyboard Layouts
+# YourOnly.One Keyboards ⌨️
 
-The **YourOnly.One Keyboard Layouts** (**YOO-KBL**) is the official website for the following keyboard layout projects.
+The **YourOnly.One Keyboards ⌨️** (**YOO-KBD**) is the official website for the following keyboard layout projects.
 
 ## The Philippines Unicode Keyboard Layout (PH-UKL)
 
@@ -45,7 +45,7 @@ The **YourOnly.One Keyboard Layouts** (**YOO-KBL**) is the official website for 
 
 ## Meta
 
-- [YourOnly.One™ Keyboard Layouts](https://keyboards.youronly.one)
+- [YourOnly.One Keyboards ⌨️](https://keyboards.youronly.one)
 - Theme: [Digital Garden](https://github.com/apvarun/digital-garden-hugo-theme)
 
 ## Attribution

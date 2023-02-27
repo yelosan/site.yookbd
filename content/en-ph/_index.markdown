@@ -1,8 +1,8 @@
 +++
-title = "YourOnly.One™ Keyboard Layouts"
+title = "YourOnly.One Keyboards ⌨️"
 +++
 
-The **YourOnly.One Keyboard Layouts** (**YOO-KBL**) is the official website for the following keyboard layout projects.
+The **YourOnly.One Keyboards ⌨️** (**YOO-KBD**) is the official website for the following keyboard layout projects.
 
 ## The Philippines Unicode Keyboard Layout (PH-UKL)
 

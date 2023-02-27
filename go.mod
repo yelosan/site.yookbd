@@ -1,4 +1,4 @@
-module codeberg.org/yelosan/site.yookbl
+module codeberg.org/yelosan/site.yookbd
 
 go 1.19
 

@@ -1,17 +1,17 @@
 
 <head>
   <!-- BGN: Yelosan Publishing Head-01-Top -->
-    {{- if templates.Exists "partials/yelosan-head-01-top.html" -}}
-      {{ partial "yelosan-head-01-top.html" . }}
+    {{- if templates.Exists "partials/youronly.one-head-01-top.html" -}}
+      {{ partial "youronly.one-head-01-top.html" . }}
     {{- end }}
   <!-- END: Yelosan Publishing Head-01-Top -->
 
   {{- /* Yelosan Publishing: We already have this
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  */ -}}
 
-  <link rel="icon" href="{{ if (isset .Site.Params "favicon") }}{{ .Site.Params.favicon }}{{ else }}/favicon.ico{{ end }}">
+    <link rel="icon" href="{{ if (isset .Site.Params "favicon") }}{{ .Site.Params.favicon }}{{ else }}/favicon.ico{{ end }}">
+  */ -}}
 
   <title>
     {{ block "title" . }} {{- .Title }} - {{ .Site.Title -}} {{ end }}
@@ -67,8 +67,8 @@
   */ -}}
 
   <!-- BGN: Yelosan Publishing Head-02-Bottom -->
-    {{- if templates.Exists "partials/yelosan-head-02-btm.html" -}}
-      {{ partial "yelosan-head-02-btm.html" . }}
+    {{- if templates.Exists "partials/youronly.one-head-02-btm.html" -}}
+      {{ partial "youronly.one-head-02-btm.html" . }}
     {{- end }}
   <!-- END: Yelosan Publishing Head-02-Bottom -->
 

@@ -1,37 +1,10 @@
 /* Copy this file to a local project for custom css styles. */
-:root,
-html,
-body {
-  font-family: var(--font-sans-yelosan), var(--font-hebrew-sans-yelosan), var(--font-baybayin-yelosan), sans-serif;
-}
-
-code,
-kbd,
-pre,
-samp {
-  font-family: var(--font-mono-yelosan), monospace;
-}
 
 /* BGN: .prose override */
   .prose {
     /* default is 65ch, which is roughly equivalent to 62.5% */
     max-width: 100%;
   }
-
-  /*
-  .prose :where(code):not(:where([class~="not-prose"] *)) {
-    border-style: outset;
-    border-width: 1px;
-    display: inline-block;
-    padding: 0.17rem;
-    margin-top: 0.12rem;
-    margin-bottom: 0.12rem;
-  }
-  .prose :where(code):not(:where([class~="not-prose"] *))::before,
-  .prose :where(code):not(:where([class~="not-prose"] *))::after {
-    content: "";
-  }
-  */
 /* END: .prose override */
 
 /* BGN: 4-column table override */
@@ -74,100 +47,3 @@ samp {
     /* min-width: 35%; */
   }
 /* END: 5-column table override */
-
-/* BGN: keyboard keys */
-  /* Source: https://github.com/auth0/kbd
-   *
-   * By: auth0 https://github.com/auth0
-  */
-  kbd {
-    display: inline-block;
-    border-radius: 3px;
-    padding: 0px 4px;
-    box-shadow: 1px 1px 1px #777;
-    margin: 2px;
-    font-size: small;
-    vertical-align: text-bottom;
-    background: #eee;
-    font-weight: 500;
-    color: #555;
-    cursor: pointer;
-    font-variant: small-caps;
-    font-weight: 600;
-
-    /* This two work */
-    /* letter-spacing: 0.5px; */
-    letter-spacing: 1px;
-
-
-    /* Prevent selection */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  kbd:hover,
-  kbd:hover * {
-    color: black;
-    /* box-shadow: 1px 1px 1px #333; */
-  }
-
-  kbd:active,
-  kbd:active * {
-    color: black;
-    box-shadow: 1px 1px 0px #ddd inset;
-  }
-
-  kbd kbd {
-    padding: 0px;
-    margin: 0 1px;
-    box-shadow: 0px 0px 0px black;
-    vertical-align: baseline;
-    background: none;
-  }
-
-  kbd kbd:hover {
-    box-shadow: 0px 0px 0px black;
-  }
-
-  kbd:active kbd {
-    box-shadow: 0px 0px 0px black;
-    background: none;
-  }
-
-  /* Deep blue */
-  kbd.deep-blue,
-  .deep-blue kbd {
-    background: steelblue;
-    color: #eee;
-  }
-
-  kbd.deep-blue:hover,
-  kbd.deep-blue:hover *,
-  .deep-blue kbd:hover {
-    color: white;
-  }
-
-  /* Dark apple */
-  kbd.dark-apple,
-  .dark-apple kbd {
-    background: black;
-    color: #ddd;
-  }
-
-  kbd.dark-apple:hover,
-  kbd.dark-apple:hover *,
-  .dark-apple kbd:hover {
-    color: white;
-  }
-
-  /* Type writer */
-  kbd.type-writer,
-  .type-writer kbd {
-    border-radius: 10px;
-    background: #333;
-    color: white;
-  }
-/* END: keyboard keys */

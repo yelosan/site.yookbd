@@ -1,0 +1,26 @@
+{{- $androidchrome192png := resources.Get "favicon/android-chrome-192x192.png" | resources.Fingerprint "sha384" -}}
+{{- $androidchrome512png := resources.Get "favicon/android-chrome-512x512.png" | resources.Fingerprint "sha384" -}}
+{
+  "name": "YourOnly.One Keyboards ⌨️",
+  "short_name": "YOO KBD ⌨️",
+  "description": "Keyboard layouts by YourOnly.One.",
+  "id": "/keyboards/",
+  "dir": "auto",
+  "lang": "en-PH",
+  "categories": ["keyboards", "layouts", "designs"],
+  "display": "minimal-ui",
+  "scope": "https://keyboards.youronly.one/",
+  "start_url": "https://keyboards.youronly.one/",
+  "icons": [
+    {
+      "src": "{{ $androidchrome192png.Permalink }}",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "{{ $androidchrome512png.Permalink }}",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

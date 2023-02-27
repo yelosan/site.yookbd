@@ -2,20 +2,20 @@
 mainTypes = ["article", "sitepage", "review"]                                                # YourOnly.One
 
 rssfull = true
-jquerycdn = true
+jquerycdn = false
 websubhubs = ["https://pubsubhubbub.appspot.com/", "https://youronlyone.superfeedr.com/", "https://pubsubhubbub.superfeedr.com/", "https://websubhub.com/hub"]
 
 #googleadsense = "ca-pub-8360283248006398"
 
-favicon_mstilecolor = "#ffc40d"
+favicon_mstilecolor = "#2b5797"
 
 ### BGN: Structured Data ###
-  siteStartYear = 2020
+  siteStartYear = 2023
 
-  description = "Official 'about me' / bio of JC John Sese Cuneta (Yuki)."
+  description = "Keyboards layouts by YourOnly.One."
   license = ""
-  keywords = ["YourOnlyOne", "YourOnly.One", "Yuki", "ᜌᜓᜃᜒ", "스노", "雪亮", "author", "bio", "profile", "about", "about me", "cv", "resume", "resumé"] # Can be overriden per page
-  images = ["https://rsc.youronly.one/img/y/Yuki_flag-300h.webp", "https://rsc.youronly.one/img/y/Yuki_flag-square-300x.webp"]
+  keywords = ["keyboards", "layouts", "designs", "YourOnly.One", "YourOnlyOne"] # Can be overriden per page
+  images = ["https://keyboards.youronly.one/favicon/android-chrome-512x512.png"]
   #copyright = ""
 ### END: Structured Data ###
 

@@ -106,79 +106,56 @@
 {{ end }}
 
 {{/* BGN: Analytics codes */}}
-  {{- $cfwebanalyticsid := .Site.Params.analytics.cfwebanalytics -}}
-  {{- $microanalyticsioid := .Site.Params.analytics.microanalyticsio -}}
-  {{- $naveranalyticsid := .Site.Params.analytics.naver -}}
-
-  {{- /*
-    NOTE: Naver Analytics will only work if inline and the actual code is retained.
-
-    - Tested:
-      - external JS
-      - embedding Hugo processed JS (with params)
-  */ -}}
-  {{- /* see previous note
-    {{- $naverjs := resources.Get "js/analytics-naver.js" | js.Build ( dict "params" ( dict "naveranalyticsid" $naveranalyticsid ) ) -}}
-    {{- $naverjs = $naverjs | fingerprint "sha512" -}}
-  */ -}}
-
-  {{- $counterdevid := .Site.Params.analytics.counterdev -}}
-  {{- $counterdevjs := resources.Get "js/analytics-counterdev.js" | js.Build ( dict "params" ( dict "counterdevid" $counterdevid ) ) -}}
-
-  {{- $swetrixid := .Site.Params.analytics.swetrix -}}
-  {{- $swetrixjs := resources.Get "js/analytics-swetrix.js" | js.Build ( dict "params" ( dict "swetrixid" $swetrixid ) ) -}}
-  {{- $swetrixjs = $swetrixjs | minify | fingerprint "sha512" -}}
-
-  {{- $msftclarityid := .Site.Params.analytics.microsoftclarity -}}
-  {{- $msftclarityjs := resources.Get "js/analytics-msftclarity.js" | js.Build ( dict "params" ( dict "msftclarityid" $msftclarityid ) ) -}}
-
-  {{- $analyticsjs := slice $counterdevjs $msftclarityjs | resources.Concat "js/analytics.js" -}}
-  {{- $analyticsjs = $analyticsjs | minify | fingerprint "sha512" -}}
-
-  {{- with $cfwebanalyticsid }}
+  {{- with and .Site.Params.analytics.cfwebanalytics (hugo.IsProduction) -}}
     <link href="https://static.cloudflareinsights.com/beacon.min.js" crossorigin="anonymous" rel="preload" as="script" />
     <script src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "{{ . }}"}' crossorigin="anonymous" type="text/javascript"></script>
-  {{ end }}
-  {{- with $microanalyticsioid }}
+  {{- end -}}
+
+  {{- with and .Site.Params.analytics.microanalyticsio (hugo.IsProduction) -}}
     <link href="https://microanalytics.io/js/script.js" rel="preload" as="script" />
     <script src="https://microanalytics.io/js/script.js" data-host="https://microanalytics.io" data-dnt="true" id="{{ . }}" type="text/javascript"></script>
-  {{ end }}
-  {{- with $naveranalyticsid }}
+  {{- end -}}
+
+  {{- with and .Site.Params.analytics.naver (hugo.IsProduction) -}}
     <link href="https://wcs.naver.net/wcslog.js" rel="preload" as="script" />
     <script src="https://wcs.naver.net/wcslog.js" type="text/javascript"></script>
-    {{- /*
-      NOTE: Naver Analytics will only work if inline and the actual code is retained.
-
-      - Tested:
-        - external JS
-        - embedding Hugo processed JS (with params)
-    */ -}}
-    {{- /* see previous note
-      <link href="{{ $naverjs.RelPermalink }}" integrity="{{ $naverjs.Data.Integrity }}" crossorigin="anonymous" rel="preload" as="script" />
-      <script src="{{ $naverjs.RelPermalink }}" integrity="{{ $naverjs.Data.Integrity }}" crossorigin="anonymous" type="text/javascript"></script>
-      <script integrity="{{ $naverjs.Data.Integrity }}" type="{{ $naverjs.MediaType }}">
-        {{ $naverjs.Content | safeJS | safeHTML }}
-      </script>
+    {{- /* NOTE: Naver Analytics will only work if inline and the actual code is retained.
+        - Tested:
+          - external JS
+          - embedding Hugo processed JS (with params)
     */ -}}
     <script type="text/javascript">
       if(!wcs_add) var wcs_add = {};
-      wcs_add["wa"] = "{{ $naveranalyticsid }}";
+      wcs_add["wa"] = "{{ . }}";
       if(window.wcs) {
         wcs_do();
       }
     </script>
   {{- end -}}
-  {{- with or $counterdevjs $msftclarityjs }}
-    <link href="{{ $analyticsjs.RelPermalink }}" integrity="{{ $analyticsjs.Data.Integrity }}" crossorigin="anonymous" rel="preload" as="script" />
-    <script src="{{ $analyticsjs.RelPermalink }}" integrity="{{ $analyticsjs.Data.Integrity }}" crossorigin="anonymous" type="{{ $analyticsjs.MediaType }}"></script>
-  {{ end }}
-  {{ with $swetrixid }}
+
+  {{- with and .Site.Params.analytics.counterdev (hugo.IsProduction) -}}
+    {{- $counterdevjs := resources.Get "js/analytics-counterdev.js" | js.Build ( dict "params" ( dict "counterdevid" . ) ) -}}
+    {{- $counterdevjs = $counterdevjs | minify | fingerprint "sha512" -}}
+    <link href="{{ $counterdevjs.RelPermalink }}" integrity="{{ $counterdevjs.Data.Integrity }}" crossorigin="anonymous" rel="preload" as="script" />
+    <script src="{{ $counterdevjs.RelPermalink }}" integrity="{{ $counterdevjs.Data.Integrity }}" crossorigin="anonymous" type="{{ $counterdevjs.MediaType }}"></script>
+  {{- end -}}
+
+  {{- with and .Site.Params.analytics.swetrix (hugo.IsProduction) -}}
+    {{- $swetrixjs := resources.Get "js/analytics-swetrix.js" | js.Build ( dict "params" ( dict "swetrixid" . ) ) -}}
+    {{- $swetrixjs = $swetrixjs | minify | fingerprint "sha512" -}}
     <link href="https://swetrix.org/swetrix.js" rel="preload" as="script" />
     <script src="https://swetrix.org/swetrix.js" type="text/javascript"></script>
     <link href="{{ $swetrixjs.RelPermalink }}" integrity="{{ $swetrixjs.Data.Integrity }}" crossorigin="anonymous" rel="preload" as="script" />
     <script src="{{ $swetrixjs.RelPermalink }}" integrity="{{ $swetrixjs.Data.Integrity }}" crossorigin="anonymous" type="{{ $swetrixjs.MediaType }}"></script>
     {{/* <noscript><img src="https://api.swetrix.com/log/noscript?pid={{ . }}" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> */}}
-  {{ end }}
+  {{- end -}}
+
+  {{- with and .Site.Params.analytics.microsoftclarity (hugo.IsProduction) -}}
+    {{- $msftclarityjs := resources.Get "js/analytics-msftclarity.js" | js.Build ( dict "params" ( dict "msftclarityid" . ) ) -}}
+    {{- $msftclarityjs = $msftclarityjs | minify | fingerprint "sha512" -}}
+    <link href="{{ $msftclarityjs.RelPermalink }}" integrity="{{ $msftclarityjs.Data.Integrity }}" crossorigin="anonymous" rel="preload" as="script" />
+    <script src="{{ $msftclarityjs.RelPermalink }}" integrity="{{ $msftclarityjs.Data.Integrity }}" crossorigin="anonymous" type="{{ $msftclarityjs.MediaType }}"></script>
+  {{- end -}}
 {{/* END: Analytics codes */}}
 
 {{/* NOTE: above was ordered intentionally */}}

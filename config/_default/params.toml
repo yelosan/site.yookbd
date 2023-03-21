@@ -5,8 +5,6 @@ rssfull = true
 jquerycdn = false
 websubhubs = ["https://pubsubhubbub.appspot.com/", "https://youronlyone.superfeedr.com/", "https://pubsubhubbub.superfeedr.com/", "https://websubhub.com/hub"]
 
-#googleadsense = "ca-pub-8360283248006398"
-
 favicon_mstilecolor = "#2b5797"
 
 ### BGN: Structured Data ###

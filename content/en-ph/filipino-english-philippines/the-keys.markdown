@@ -60,9 +60,6 @@ type = "articles"                                             # articles, portfo
   #rel = "noopener"
 +++
 
-
-<!--more-->
-
 ## New letter keys
 
 <div class="table-5col">
@@ -126,12 +123,12 @@ Easy to remember. Use the <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>key</kbd> combina
 | dieresis<br/>tuldik patuldok | ◌<span class="text-guide diacritics-sans-dejavu">̈</span> | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>\'</kbd> | <ul><li>we<span class="text-guide diacritics-sans-dejavu">̈</span>n (Ilokano)</li><li>ke<span class="text-guide diacritics-sans-dejavu">̈</span>tke<span class="text-guide diacritics-sans-dejavu">̈</span>t (Pangasinense)</li><li>mate<span class="text-guide diacritics-sans-dejavu">̈</span>y (Mëranaw)</li><li>yuhe<span class="text-guide diacritics-sans-dejavu">̈</span>m (Kinaray-a)</li><li>Panagbe<span class="text-guide diacritics-sans-dejavu">̈</span>nga (Kankanaëy)</li></ul> | Filipino schwa |
 | grave<br/>tuldik paiwa | ◌<span class="text-guide diacritics-sans-dejavu">̀</span> | <kbd>AltGr</kbd><kbd>\`</kbd> | <ul><li>bata<span class="text-guide diacritics-sans-dejavu">̀</span></li></ul> | Malumi |
 | tildə<br/>tuldik tildë | ◌<span class="text-guide diacritics-sans-dejavu">̃</span> | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>\`</kbd> | <ul><li>sag<span class="text-guide diacritics-sans-dejavu">̃</span>nay  (sa·n͠gay)</li><li>sagn<span class="text-guide diacritics-sans-dejavu">̃</span>ay (sa·n͠gay)</li></ul> |
-| double tildə<br/>tuldik tildë | ◌<span class="text-guide diacritics-sans-dejavu">͠</span> | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>2</kbd> | <ul><li>san<span class="text-guide diacritics-sans-dejavu">͠</span>ga (sa·n͠ga)</li><li>pan<span class="text-guide diacritics-sans-dejavu">͠</span>gulo (pa·n͠gu·lo)</li></ul> |
+| double tildə<br/>tuldik tildë | ◌<span class="text-guide diacritics-sans-dejavu">͠</span>◌ | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>2</kbd> | <ul><li>san<span class="text-guide diacritics-sans-dejavu">͠</span>ga (sa·n͠ga)</li><li>pan<span class="text-guide diacritics-sans-dejavu">͠</span>gulo (pa·n͠gu·lo)</li></ul> |
 | circumflex<br/>tuldik pakupya | ◌<span class="text-guide diacritics-sans-dejavu">̂</span> | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>6</kbd> | <ul><li>panibugho<span class="text-guide diacritics-sans-dejavu">̂</span></li><li>bu<span class="text-guide diacritics-sans-dejavu">̂</span>ngaw</li></ul> | Maragsa |
 | macron<br/>tuldik pahaba | ◌<span class="text-guide diacritics-sans-dejavu">̄</span> | <kbd>AltGr</kbd><kbd>\;</kbd> | <ul><li>a<span class="text-guide diacritics-sans-dejavu">̄</span>so</li></ul> |
-| double macron<br/>tuldik pahaba | ◌<span class="text-guide diacritics-sans-dejavu">͞</span> | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>\;</kbd> | |
+| double macron<br/>tuldik pahaba | ◌<span class="text-guide diacritics-sans-dejavu">͞</span>◌ | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>\;</kbd> | |
 | macron below<br/>tuldik diin | ◌<span class="text-guide diacritics-sans-dejavu">̱</span> | <kbd>AltGr</kbd><kbd>\-</kbd> | |
-| double macron below<br/>tuldik diin | ◌<span class="text-guide diacritics-sans-dejavu">͟</span> | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>\-</kbd> | <ul><li>trab<span class="text-guide diacritics-sans-dejavu">͟</span>aho</li></ul> |
+| double macron below<br/>tuldik diin | ◌<span class="text-guide diacritics-sans-dejavu">͟</span>◌ | <kbd>AltGr</kbd><kbd>Shift</kbd><kbd>\-</kbd> | <ul><li>trab<span class="text-guide diacritics-sans-dejavu">͟</span>aho</li></ul> |
 
 </div>
 

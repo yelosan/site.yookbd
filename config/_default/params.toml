@@ -72,9 +72,11 @@ favicon_mstilecolor = "#2b5797"
     followit = "uYZyV7MVARnWg9phNgMQ"
 
   [analytics]
-    counterdev = "youronlyone"
-    microanalyticsio = "ZwSg9rf6GA"
-    swetrix = "bYdcXUajNvru"
     cfwebanalytics = "07a05e5302d1458da3561ce41791e284"
-    microsoftclarity = "63ddi0b99e"
+    #microanalyticsio = "ZwSg9rf6GA"
+    naver = "1375cb4224f1c40"   # https://youronly.one
+    #naver = "137a7c92882ac90"   # https://im.youronly.one
+    counterdev = "youronlyone"
+    swetrix = "bYdcXUajNvru"
+    #microsoftclarity = "63ddi0b99e"
 ### END: Other Settings ###
